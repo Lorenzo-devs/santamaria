@@ -32,7 +32,8 @@ export default function ShopHome({
                 Santa Maria RP
               </h1>
               <p className="mt-4 text-white/75">
-                Compre VIPs, veículos e extras. Pagamento com PIX e cartão.
+                Compre Gangster, Objetos, Gamepass e outros itens. Pagamento com
+                PIX e cartão.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <a

@@ -1,10 +1,4 @@
-export type CategorySlug =
-  | 'vips'
-  | 'veiculos'
-  | 'blindados'
-  | 'faccao'
-  | 'privados'
-  | 'outros'
+export type CategorySlug = 'gangster' | 'outros' | 'objetos' | 'gamepass'
 
 export type Category = {
   slug: CategorySlug
@@ -22,86 +16,157 @@ export type Product = {
 }
 
 export const categories: Category[] = [
-  { slug: 'vips', name: '💎 VIPS', emoji: '💎' },
-  { slug: 'veiculos', name: '🚗 Veículos', emoji: '🚗' },
-  { slug: 'blindados', name: '🚙 Blindados', emoji: '🚙' },
-  { slug: 'faccao', name: '🥷 Facção', emoji: '🥷' },
-  { slug: 'privados', name: '⭐ Privados', emoji: '⭐' },
+  { slug: 'gangster', name: '🥷 Gangster', emoji: '🥷' },
   { slug: 'outros', name: '🔎 Outros', emoji: '🔎' },
+  { slug: 'objetos', name: '🔫 Objetos', emoji: '🔫' },
+  { slug: 'gamepass', name: '⭐ Gamepass', emoji: '⭐' },
 ]
 
 export const products: Product[] = [
+  // Gangster
   {
-    id: 'vip-bronze-30d',
-    category: 'vips',
-    name: 'VIP Bronze (30 dias)',
-    description: 'Benefícios básicos para começar com vantagem.',
-    priceCents: 2990,
-    badge: 'Mais vendido',
-  },
-  {
-    id: 'vip-prata-30d',
-    category: 'vips',
-    name: 'VIP Prata (30 dias)',
-    description: 'Benefícios intermediários + bônus extras.',
+    id: 'skin-gangster',
+    category: 'gangster',
+    name: 'Skin Gangster',
+    description: 'Skin exclusiva para personagem gangster.',
     priceCents: 4990,
+    badge: 'Popular',
   },
   {
-    id: 'vip-ouro-30d',
-    category: 'vips',
-    name: 'VIP Ouro (30 dias)',
-    description: 'Benefícios premium para evoluir rápido.',
+    id: 'pack-faccao',
+    category: 'gangster',
+    name: 'Pack Facção',
+    description: 'Pack completo com itens de facção.',
     priceCents: 7990,
   },
   {
-    id: 'carro-sportivo',
-    category: 'veiculos',
-    name: 'Veículo Esportivo',
-    description: 'Um esportivo para chegar com estilo.',
-    priceCents: 5990,
-  },
-  {
-    id: 'carro-suv',
-    category: 'veiculos',
-    name: 'SUV',
-    description: 'Conforto e espaço para o seu corre.',
-    priceCents: 5490,
-  },
-  {
-    id: 'blindado-basic',
-    category: 'blindados',
-    name: 'Blindado (Básico)',
-    description: 'Proteção extra para situações perigosas.',
-    priceCents: 9990,
-  },
-  {
-    id: 'blindado-premium',
-    category: 'blindados',
-    name: 'Blindado (Premium)',
-    description: 'Máxima proteção e presença.',
-    priceCents: 14990,
-    badge: 'Top',
-  },
-  {
-    id: 'faccao-vaga',
-    category: 'faccao',
-    name: 'Vaga em Facção',
-    description: 'Entre para uma facção (sujeito a regras do servidor).',
+    id: 'bau-extra',
+    category: 'gangster',
+    name: 'Adicionar Baú',
+    description: 'Baú adicional para armazenar seus itens.',
     priceCents: 3990,
   },
   {
-    id: 'privado-pack',
-    category: 'privados',
-    name: 'Pack Privado',
-    description: 'Conteúdo exclusivo para grupos/organizadores.',
-    priceCents: 12990,
+    id: 'pacote-reforco',
+    category: 'gangster',
+    name: 'Pacote Reforço',
+    description: 'Pacote com itens de reforço para gangster.',
+    priceCents: 6990,
+  },
+
+  // Outros
+  {
+    id: 'unban-normal',
+    category: 'outros',
+    name: 'Unban Normal',
+    description: 'Remoção de ban temporário.',
+    priceCents: 1990,
   },
   {
-    id: 'outros-passaporte',
+    id: 'unban-permanente',
     category: 'outros',
-    name: 'Passaporte',
-    description: 'Item utilitário para o seu personagem.',
+    name: 'Unban Permanente',
+    description: 'Remoção de ban permanente.',
+    priceCents: 4990,
+    badge: 'Importante',
+  },
+  {
+    id: 'caixa-misteriosa',
+    category: 'outros',
+    name: 'Caixa Misteriosa',
+    description: 'Caixa com itens aleatórios exclusivos.',
+    priceCents: 2990,
+  },
+  {
+    id: 'placa-carro',
+    category: 'outros',
+    name: 'Placa de Carro',
+    description: 'Placa personalizada para seu veículo.',
+    priceCents: 1490,
+  },
+
+  // Objetos
+  {
+    id: 'ak-47',
+    category: 'objetos',
+    name: 'AK-47',
+    description: 'Rifle de assalto potente e preciso.',
+    priceCents: 8990,
+    badge: 'Top',
+  },
+  {
+    id: 'glock',
+    category: 'objetos',
+    name: 'Glock',
+    description: 'Pistola semi-automática confiável.',
+    priceCents: 3990,
+  },
+  {
+    id: 'g3',
+    category: 'objetos',
+    name: 'G3',
+    description: 'Rifle de batalha versátil.',
+    priceCents: 7990,
+  },
+  {
+    id: 'revolver',
+    category: 'objetos',
+    name: 'Revolver',
+    description: 'Revolver clássico com alto dano.',
+    priceCents: 4990,
+  },
+  {
+    id: 'mascara',
+    category: 'objetos',
+    name: 'Máscara',
+    description: 'Máscara para proteger sua identidade.',
     priceCents: 1990,
+  },
+  {
+    id: 'corda',
+    category: 'objetos',
+    name: 'Corda',
+    description: 'Corda para diversas utilidades.',
+    priceCents: 990,
+  },
+
+  // Gamepass
+  {
+    id: 'mercedez-amg',
+    category: 'gamepass',
+    name: 'Carro Mercedez AMG',
+    description: 'Veículo esportivo Mercedez AMG exclusivo.',
+    priceCents: 14990,
+    badge: 'Premium',
+  },
+  {
+    id: '2x-xp',
+    category: 'gamepass',
+    name: '2x XP',
+    description: 'Dobro de experiência por 30 dias.',
+    priceCents: 9990,
+  },
+  {
+    id: 'mansao',
+    category: 'gamepass',
+    name: 'Mansão',
+    description: 'Mansão exclusiva com todos os benefícios.',
+    priceCents: 19990,
+    badge: 'Luxo',
+  },
+  {
+    id: 'skin-jbl',
+    category: 'gamepass',
+    name: 'Skin JBL',
+    description: 'Skin exclusiva JBL para seu personagem.',
+    priceCents: 5990,
+  },
+  {
+    id: 'saveiro-paredao',
+    category: 'gamepass',
+    name: 'Saveiro Paredão',
+    description: 'Saveiro modificado com som potente.',
+    priceCents: 12990,
   },
 ]
 

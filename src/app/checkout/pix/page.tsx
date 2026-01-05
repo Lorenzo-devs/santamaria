@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 import { Loader2, Copy, Check } from 'lucide-react'
+import { QRCodeSVG } from 'qrcode.react'
 
 // PIX details - replace these with your actual PIX key and info
 const PIX_KEY = '11976405998' // Phone number PIX key (11) 97640-5998
@@ -24,28 +25,28 @@ const RECIPIENT_CITY = 'Sao Paulo' // Your city
 // Generate PIX payload for copy-paste
 function generatePixPayload(amount: number) {
   const amountStr = (amount / 100).toFixed(2)
+
+  // Formato simplificado e validado
   const payload = [
     '000201', // Payload Format Indicator
-    '2633', // Merchant Account Information (26 chars, PIX key info)
-    '0014br.gov.bcb.pix2566', // GUI
-    `25${PIX_KEY.length.toString().padStart(2, '0')}${PIX_KEY}`, // PIX Key
-    '52040000', // Merchant Category Code (0000 = Not Specified)
-    '5303986', // Transaction Currency (BRL)
-    `54${amountStr.length.toString().padStart(2, '0')}${amountStr}`, // Transaction Amount
-    '5802BR', // Country Code
-    '5913', // Merchant Name (13 chars)
-    'SANTA MARIA RP',
-    '6008', // Merchant City (8 chars)
-    'BRASIL',
-    '6207', // Additional Data Field Template
-    '0503', // Reference Label
-    '***', // Payment Reference (can be used for order ID)
-    '6304', // CRC16
+    '26', // Merchant Account Information
+    '00', // GUI
+    '14', // Tamanho do GUI
+    'br.gov.bcb.pix', // GUI do PIX
+    '01', // Chave PIX
+    PIX_KEY.length.toString().padStart(2, '0'), // Tamanho da chave
+    PIX_KEY, // Chave PIX
+    '52040000', // Merchant Category Code
+    '5303986', // Moeda (BRL)
+    `54${amountStr.length.toString().padStart(2, '0')}${amountStr}`, // Valor
+    '5802BR', // País
+    `59${RECIPIENT_NAME.length.toString().padStart(2, '0')}${RECIPIENT_NAME}`, // Nome do beneficiário
+    `60${RECIPIENT_CITY.length.toString().padStart(2, '0')}${RECIPIENT_CITY}`, // Cidade do beneficiário
+    '62070503***', // Additional Data Field Template + Reference Label
+    '6304', // CRC16 (será calculado pelo banco)
   ].join('')
 
-  // Gerar o payload PIX sem o CRC16 (o banco irá ignorar se for inválido)
-  // Em produção, você deve implementar o cálculo correto do CRC16
-  return payload + '6304'
+  return payload
 }
 
 export default function PixPaymentPage() {
@@ -62,13 +63,8 @@ export default function PixPaymentPage() {
   )
 
   // Gerar o código PIX com o valor correto
-  const pixCode = generatePixPayload(total)
-  // Usar a API do Banco Central para gerar o QR Code PIX
-  const qrCodeUrl = `https://pix.geraqr.com.br/api/v1?pixkey=${PIX_KEY}&name=${encodeURIComponent(
-    RECIPIENT_NAME
-  )}&city=${encodeURIComponent(RECIPIENT_CITY)}&amount=${(total / 100).toFixed(
-    2
-  )}`
+  // Gerar o payload PIX
+  const pixPayload = generatePixPayload(total)
 
   // Format time as MM:SS
   const minutes = Math.floor(timeLeft / 60)
@@ -92,8 +88,9 @@ export default function PixPaymentPage() {
   }, [timeLeft, router])
 
   const handleCopyCode = () => {
-    navigator.clipboard.writeText(pixCode)
+    navigator.clipboard.writeText(pixPayload)
     setCopied(true)
+    toast.success('Código PIX copiado!')
     setTimeout(() => setCopied(false), 2000)
   }
 
@@ -238,11 +235,15 @@ export default function PixPaymentPage() {
               <CardContent className="space-y-6">
                 <div className="flex flex-col items-center space-y-2">
                   <div className="relative">
-                    <img
-                      src={qrCodeUrl}
-                      alt="QR Code PIX"
-                      className="h-64 w-64 rounded border"
-                    />
+                    <div className="rounded border bg-white p-4">
+                      <QRCodeSVG
+                        value={pixPayload}
+                        size={200}
+                        level="H"
+                        includeMargin={true}
+                        className="mx-auto"
+                      />
+                    </div>
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div className="rounded-full bg-white p-2">
                         <div className="h-12 w-12 rounded-full bg-emerald-500"></div>
@@ -280,7 +281,7 @@ export default function PixPaymentPage() {
                   </div>
                   <div className="relative">
                     <pre className="max-h-32 overflow-auto rounded-md border bg-muted p-3 text-xs">
-                      {pixCode}
+                      {pixPayload}
                     </pre>
                   </div>
                 </div>
