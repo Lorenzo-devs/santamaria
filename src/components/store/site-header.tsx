@@ -8,7 +8,8 @@ export function SiteHeader() {
   const { count } = useCart()
 
   const discordUrl =
-    process.env.NEXT_PUBLIC_DISCORD_URL || 'https://discord.gg/santamariarp'
+    process.env.NEXT_PUBLIC_DISCORD_URL ||
+    'https://discord.gg/YOUR_DISCORD_CODE'
 
   return (
     <header className="border-b border-white/10 bg-gradient-to-br from-slate-950 via-slate-950 to-blue-950 text-white">

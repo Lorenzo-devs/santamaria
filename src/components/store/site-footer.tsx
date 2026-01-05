@@ -2,7 +2,8 @@ import Link from 'next/link'
 
 export function SiteFooter() {
   const discordUrl =
-    process.env.NEXT_PUBLIC_DISCORD_URL || 'https://discord.gg/santamariarp'
+    process.env.NEXT_PUBLIC_DISCORD_URL ||
+    'https://discord.gg/YOUR_DISCORD_CODE'
 
   return (
     <footer className="border-t bg-slate-950 text-white">

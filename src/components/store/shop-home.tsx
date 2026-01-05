@@ -15,7 +15,8 @@ export default function ShopHome({
   const [active, setActive] = useState<string>(categories[0]?.slug ?? '')
 
   const discordUrl =
-    process.env.NEXT_PUBLIC_DISCORD_URL || 'https://discord.gg/santamariarp'
+    process.env.NEXT_PUBLIC_DISCORD_URL ||
+    'https://discord.gg/YOUR_DISCORD_CODE'
 
   const visible = useMemo(() => {
     if (!active) return products
